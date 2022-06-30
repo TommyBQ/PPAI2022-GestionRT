@@ -2,18 +2,41 @@
 {
     public class Sesion
     {
-        private string descripcion { get; set; }
-        private Usuario usuario { get; set; }
+        private string _descripcion;
+        private Usuario _usuario;
 
+        public string Descripcion { get { return _descripcion; } set { setDescripcion(value); } }
+        public Usuario Usuario { get { return _usuario; } set { setUsuario(value); } }
+
+        public Sesion()
+        {
+        }
         public Sesion(string descripcion, Usuario usuario)
         {
-            this.descripcion = descripcion;
-            this.usuario = usuario;
+            Descripcion = descripcion;
+            Usuario = usuario;
         }
 
-        public void conocerUsuario()
+        public void setSesion(string descripcion, Usuario usuario)
         {
+            setDescripcion(descripcion);
+            setUsuario(usuario);
+        }
 
+        public void setUsuario(Usuario user)
+        {
+            _usuario = user;
+        }
+
+        public void setDescripcion(string desc)
+        {
+            _descripcion = desc;
+        }
+
+
+        public Usuario conocerUsuario()
+        {
+            return Usuario;
         }
     }
 }

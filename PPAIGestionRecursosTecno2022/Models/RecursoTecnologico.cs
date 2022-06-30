@@ -2,22 +2,19 @@
 {
     public class RecursoTecnologico
     {
-        private int numeroRT { get; set; }
-        private DateTime fechaAlta { get; set; }
-        private Modelo _modelo { get; set; }
-        private TipoRT _tipo { get; set; }
-        private List<Turno>? _turno { get; set; }
-        private List<CambioEstadoRT> _cambioEstado { get; set; }
+        private int _numeroRT;
+        private DateTime _fechaAlta;
+        private Modelo _modelo;
+        private TipoRT _tipo;
+        private List<Turno>? _turno;
+        private List<CambioEstadoRT> _cambioEstado;
 
-        public RecursoTecnologico(int numeroRT, DateTime fechaAlta, Modelo modelo, TipoRT tipo)
-        {
-            this.numeroRT = numeroRT;
-            this.fechaAlta = fechaAlta;
-            this._modelo = modelo ?? throw new ArgumentNullException(nameof(modelo));
-            this._tipo = tipo ?? throw new ArgumentNullException(nameof(tipo));
-            this._turno = new List<Turno>();
-            this._cambioEstado = new List<CambioEstadoRT>();
-        }
+        public int NumeroRT { get { return _numeroRT; } set { _numeroRT = value; } }
+        public DateTime FechaAlta { get { return _fechaAlta; } set { _fechaAlta = value;} }
+        public Modelo Modelo { get { return _modelo; } set { _modelo = value; } }
+        public TipoRT Tipo { get { return _tipo; } set { _tipo = value; } }
+        public List<Turno>? Turno { get { return _turno; } set { _turno = value; } }
+        public List<CambioEstadoRT> CambioEstado { get { return _cambioEstado; } set { _cambioEstado = value; } }
 
         public void AgregarCambioEstadoRT(CambioEstadoRT cambioEstadoRT)
         {
@@ -27,16 +24,6 @@
         public void AgregarTurno(Turno turno)
         {
             _turno.Add(turno);
-        }
-
-        public IReadOnlyCollection<CambioEstadoRT> CambioEstado
-        {
-            get { return _cambioEstado.AsReadOnly(); }
-        }        
-        
-        public IReadOnlyCollection<Turno> Turno
-        {
-            get { return _turno.AsReadOnly(); }
         }
 
         public void estaDisponible()

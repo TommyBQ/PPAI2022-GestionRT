@@ -37,18 +37,24 @@ namespace PPAIGestionRecursosTecno2022.DAO
 
         public bool ValidarUsuario(string usuario, string clave)
         {
-            List<Usuario> allUsers = GetAllUsuarios();
-            bool validado = false;
-
-            foreach (var us in allUsers)
+            using (IDbConnection conexion = new SqlConnection(cadena))
             {
-                if (us.getUsuario() == usuario && us.getClave() == clave)
+                conexion.Open();
+                var values = new { usuario = usuario };
+                var unUsuario = conexion.Query("_paBuscarUnUsuario", values, commandType: CommandType.StoredProcedure).ToList();
+                if (unUsuario.Count != 0)
                 {
-                    validado = true;
-                    return validado;
+                    foreach (var user in unUsuario)
+                    {
+                        string claveUser = (string)user.clave;
+                        if (claveUser == clave)
+                        {
+                            return true;
+                        }
+                    }
                 }
             }
-            return validado;
+            return false;
         }
 
         public string RegistrarUsuario(string clave, string usuario)
@@ -66,6 +72,39 @@ namespace PPAIGestionRecursosTecno2022.DAO
                 catch (Exception e)
                 {
                     return "Hubo un error: " + e;
+                }
+
+            }
+        }
+
+        public Usuario getUnUsuario(string nombreUsuario)
+        {
+            using (IDbConnection conexion = new SqlConnection(cadena))
+            {
+                conexion.Open();
+
+                try
+                {
+                    var values = new { usuario = nombreUsuario };
+                    var usuario = conexion.Query("_paBuscarUnUsuario", values, commandType: CommandType.StoredProcedure);
+                    if (usuario != null)
+                    {
+                        foreach (var user in usuario)
+                        {
+                            int idUser = (int)user.id_usuario;
+                            string claveUser = (string)user.clave;
+                            string nombreUser = (string)user.usuario;
+                            bool habilitadoUser = (bool)user.habilitado;
+
+                            Usuario usuarioEncontrado = new Usuario(claveUser, nombreUser, idUser, habilitadoUser);
+                            return usuarioEncontrado;
+                        }
+                    }
+                    return new Usuario();
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("No se encontró usuario");
                 }
 
             }

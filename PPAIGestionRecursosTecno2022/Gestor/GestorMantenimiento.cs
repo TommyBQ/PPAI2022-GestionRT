@@ -1,29 +1,47 @@
-﻿using PPAIGestionRecursosTecno2022.Models;
+﻿using PPAIGestionRecursosTecno2022.DAO;
+using PPAIGestionRecursosTecno2022.Exceptions;
+using PPAIGestionRecursosTecno2022.Models;
 
 namespace PPAIGestionRecursosTecno2022.Gestor
 {
     public class GestorMantenimiento
     {
-        private DateTime fechaFin { get; set; }
-        private string motivo { get; set; }
-        private List<RecursoTecnologico> recursos { get; }
-        private List<Turno> turnos { get; }
-        private AsignacionCientificoCI cientifico { get; }
-        private Sesion sesion { get; }
-        private AsignacionCientificoCI asignacionCientifico { get; }
+        private DateTime _fechaFin;
+        private string _motivo;
+        private List<RecursoTecnologico> _recursos;
+        private List<Turno> _turnos;
+        private AsignacionCientificoCI _cientifico;
+        private Sesion _sesion;
+        private AsignacionCientificoCI _asignacionCientifico;
 
+        public DateTime FechaFin { get { return _fechaFin; } set { _fechaFin = value; } }
+        public string Motivo { get { return _motivo; } set { _motivo = value; } }
+        public List<RecursoTecnologico> Recursos { get { return _recursos; } set { _recursos = value; } }
+        public List<Turno> Turnos { get { return _turnos; } set { _turnos = value; } }
+        public Sesion Sesion { get { return _sesion; } set { setSesion(value); } }
+        public AsignacionCientificoCI AsignacionCientifico { get { return _cientifico; } set { _cientifico = value; } }
 
-        public GestorMantenimiento(DateTime fechaFin, string motivo, List<RecursoTecnologico> recursos, List<Turno> turnos, AsignacionCientificoCI cientifico)
+        public GestorMantenimiento(DateTime fechaFin, string motivo, List<RecursoTecnologico> recursos, List<Turno> turnos, AsignacionCientificoCI asignacionCientifico, Sesion sesion)
         {
-            this.fechaFin = fechaFin;
-            this.motivo = motivo;
-            this.recursos = recursos;
-            this.turnos = turnos;
-            this.cientifico = cientifico;
+            FechaFin = fechaFin;
+            Motivo = motivo;
+            Recursos = recursos;
+            Turnos = turnos;
+            AsignacionCientifico = asignacionCientifico;
+            Sesion = sesion;
+        }
+
+        public GestorMantenimiento()
+        {
+        }
+        public void setSesion(Sesion sesion)
+        {
+            _sesion = sesion;
         }
 
         public void buscarRecursosDelResponsable()
         {
+            Usuario usuarioSesionActiva = Sesion.conocerUsuario();
 
         }
         public void buscarDatosRT()
@@ -69,6 +87,12 @@ namespace PPAIGestionRecursosTecno2022.Gestor
         public void finCU()
         {
 
+        }
+
+
+        public Sesion getSesion()
+        {
+            return Sesion;
         }
     }
 }

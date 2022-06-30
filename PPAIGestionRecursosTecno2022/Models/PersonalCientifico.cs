@@ -2,17 +2,25 @@
 {
     public class PersonalCientifico
     {
-        private int legajo { get; set; }
-        private string nombre { get; set; }
-        private string apellido { get; set; }
-        private string correo { get; set; }
+        private int _legajo;
+        private string _nombre;
+        private string _apellido;
+        private string _correo;
+        private int _idUsuario;
 
-        public PersonalCientifico(int legajo, string nombre, string apellido, string correo)
+        public int Legajo { get { return _legajo; } set { _legajo = value; } }
+        public string Nombre { get { return _nombre; } set { _nombre = value;} }
+        public string Apellido { get { return _apellido; } set { _apellido = value; } }
+        public string Correo { get { return _correo; } set { _correo = value; } }
+        public int IdUsuario { get { return _idUsuario; } set { _idUsuario = value;} }
+
+        public PersonalCientifico(int legajo, string nombre, string apellido, string correo, int idUsuario)
         {
-            this.legajo = legajo;
-            this.nombre = nombre;
-            this.apellido = apellido;
-            this.correo = correo;
+            Legajo = legajo;
+            Nombre = nombre;
+            Apellido = apellido;
+            Correo = correo;
+            IdUsuario = idUsuario;
         }
 
         public void esTuUsuario()

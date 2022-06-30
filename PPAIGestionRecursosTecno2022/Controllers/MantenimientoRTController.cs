@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using PPAIGestionRecursosTecno2022.DAO;
+using PPAIGestionRecursosTecno2022.Gestor;
 using PPAIGestionRecursosTecno2022.Models;
+using PPAIGestionRecursosTecno2022.Exceptions;
 using System.Data;
 
 namespace PPAIGestionRecursosTecno2022.Controllers
@@ -11,7 +13,13 @@ namespace PPAIGestionRecursosTecno2022.Controllers
     [Route("api/[controller]")]
     public class MantenimientoRTController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
+        public GestorMantenimiento gestorMantenimiento;
+        private UsuariosDAO usuariosDAO => new UsuariosDAO();
+
+        public MantenimientoRTController()
+        {
+            this.gestorMantenimiento = new GestorMantenimiento();
+        }
 
         [HttpGet]
         [Route("Saludar")]
@@ -27,15 +35,22 @@ namespace PPAIGestionRecursosTecno2022.Controllers
             UsuariosDAO usuariosDAO = new UsuariosDAO();
             string response = usuariosDAO.RegistrarUsuario(usuario, clave);
             return response;
-        }        
-        
+        }
+
         [HttpGet]
-        [Route("ValidarUsuario")]
-        public bool ValidarUsuario(string usuario, string clave)
+        [Route("IniciarSesion")]
+        public IActionResult IniciarSesion(string usuario, string clave)
         {
-            UsuariosDAO usuariosDAO = new UsuariosDAO();
-            bool response = usuariosDAO.ValidarUsuario(usuario, clave);
-            return response;
+            bool usuarioValidado = usuariosDAO.ValidarUsuario(usuario, clave);
+            if (!usuarioValidado)
+            {
+                return BadRequest("No se pudo iniciar sesión. Usuario o contraseña incorrecto!");
+            }
+            Usuario usuarioIniciado = usuariosDAO.getUnUsuario(usuario);
+            Sesion sesion = new Sesion("Sesion del usuario: " + usuario, usuarioIniciado);
+
+            gestorMantenimiento.Sesion = sesion;
+            return Ok(sesion);
         }
     }
 }
