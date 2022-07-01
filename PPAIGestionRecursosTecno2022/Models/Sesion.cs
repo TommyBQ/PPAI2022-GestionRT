@@ -2,9 +2,11 @@
 {
     public class Sesion
     {
+        private int _id;
         private string _descripcion;
         private Usuario _usuario;
 
+        public int Id { get { return _id; } set { _id = value; } }
         public string Descripcion { get { return _descripcion; } set { setDescripcion(value); } }
         public Usuario Usuario { get { return _usuario; } set { setUsuario(value); } }
 
@@ -32,7 +34,18 @@
         {
             _descripcion = desc;
         }
-
+        public int getId()
+        {
+            return Id;
+        }
+        public string getDescripcion()
+        {
+            return Descripcion;
+        }
+        public Usuario getUsuario()
+        {
+            return Usuario;
+        }
 
         public Usuario conocerUsuario()
         {

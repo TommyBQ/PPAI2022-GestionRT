@@ -14,12 +14,12 @@ namespace PPAIGestionRecursosTecno2022.Gestor
         private Sesion _sesion;
         private AsignacionCientificoCI _asignacionCientifico;
 
-        public DateTime FechaFin { get { return _fechaFin; } set { _fechaFin = value; } }
-        public string Motivo { get { return _motivo; } set { _motivo = value; } }
-        public List<RecursoTecnologico> Recursos { get { return _recursos; } set { _recursos = value; } }
-        public List<Turno> Turnos { get { return _turnos; } set { _turnos = value; } }
+        public DateTime FechaFin { get { return _fechaFin; } set { setFechaFin(value); } }
+        public string Motivo { get { return _motivo; } set { setMotivo(value); } }
+        public List<RecursoTecnologico> Recursos { get { return _recursos; } set { setRecursos(value); } }
+        public List<Turno> Turnos { get { return _turnos; } set { setTurnos(value); } }
         public Sesion Sesion { get { return _sesion; } set { setSesion(value); } }
-        public AsignacionCientificoCI AsignacionCientifico { get { return _cientifico; } set { _cientifico = value; } }
+        public AsignacionCientificoCI AsignacionCientifico { get { return _cientifico; } set { setAsignacionCientifico(value); } }
 
         public GestorMantenimiento(DateTime fechaFin, string motivo, List<RecursoTecnologico> recursos, List<Turno> turnos, AsignacionCientificoCI asignacionCientifico, Sesion sesion)
         {
@@ -34,9 +34,34 @@ namespace PPAIGestionRecursosTecno2022.Gestor
         public GestorMantenimiento()
         {
         }
+        public void setFechaFin(DateTime fechaFin)
+        {
+            _fechaFin = fechaFin;
+        }
+
+        public void setMotivo(string motivo)
+        {
+            _motivo = motivo;
+        }
+
+        public void setRecursos(List<RecursoTecnologico> recursosTecnologicos)
+        {
+            _recursos = recursosTecnologicos;
+        }
+
+        public void setTurnos(List<Turno> turnos)
+        {
+            _turnos = turnos;
+        }
+
         public void setSesion(Sesion sesion)
         {
             _sesion = sesion;
+        }
+
+        public void setAsignacionCientifico(AsignacionCientificoCI asignacionCientifico)
+        {
+            _asignacionCientifico = asignacionCientifico;
         }
 
         public void buscarRecursosDelResponsable()
@@ -89,10 +114,33 @@ namespace PPAIGestionRecursosTecno2022.Gestor
 
         }
 
+        public DateTime getFechaFin(DateTime fechaFin)
+        {
+            return FechaFin;
+        }
 
+        public string getMotivo(string motivo)
+        {
+            return Motivo;
+        }
+
+        public List<RecursoTecnologico> getRecursos(List<RecursoTecnologico> recursosTecnologicos)
+        {
+            return Recursos;
+        }
+
+        public List<Turno> getTurnos(List<Turno> turnos)
+        {
+            return Turnos;
+        }
         public Sesion getSesion()
         {
             return Sesion;
         }
+        public AsignacionCientificoCI getAsignacionCientifico(AsignacionCientificoCI asignacionCientifico)
+        {
+            return AsignacionCientifico;
+        }
+
     }
 }

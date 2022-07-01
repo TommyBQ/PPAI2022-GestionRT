@@ -9,40 +9,89 @@
         private List<Turno>? _turno;
         private List<CambioEstadoRT> _cambioEstado;
 
-        public int NumeroRT { get { return _numeroRT; } set { _numeroRT = value; } }
-        public DateTime FechaAlta { get { return _fechaAlta; } set { _fechaAlta = value;} }
-        public Modelo Modelo { get { return _modelo; } set { _modelo = value; } }
-        public TipoRT Tipo { get { return _tipo; } set { _tipo = value; } }
-        public List<Turno>? Turno { get { return _turno; } set { _turno = value; } }
-        public List<CambioEstadoRT> CambioEstado { get { return _cambioEstado; } set { _cambioEstado = value; } }
+        public int NumeroRT { get { return _numeroRT; } set { setNumeroRT(value); } }
+        public DateTime FechaAlta { get { return _fechaAlta; } set { setFechaAlta(value); } }
+        public Modelo Modelo { get { return _modelo; } set { setModelo(value); } }
+        public TipoRT Tipo { get { return _tipo; } set { setTipo(value); } }
+        public List<Turno>? Turno { get { return _turno; } set { setTurnos(value); } }
+        public List<CambioEstadoRT> CambioEstado { get { return _cambioEstado; } set { setCambioEstadoRT(value); } }
 
+        public RecursoTecnologico(int numeroRT, DateTime fechaAlta, Modelo modelo, TipoRT tipo, List<Turno>? turno, List<CambioEstadoRT> cambioEstado)
+        {
+            NumeroRT = numeroRT;
+            FechaAlta = fechaAlta;
+            Modelo = modelo;
+            Tipo = tipo;
+            Turno = turno;
+            CambioEstado = cambioEstado;
+        }
+
+        public int getNumeroRT()
+        {
+            return NumeroRT;
+        }
+        public DateTime getFechaAlta()
+        {
+            return FechaAlta;
+        }
+        public TipoRT getTipo()
+        {
+            return Tipo;
+        }
+        public List<Marca> getMarcas()
+        {
+            return Modelo.getMarcas();
+        }
+        public Modelo getModelo()
+        {
+            return Modelo;
+        }
+        public List<Turno>? getTurnos()
+        {
+            return Turno;
+        }
+        public List<CambioEstadoRT> getCambioEstadoRT()
+        {
+            return CambioEstado;
+        }
+        public void setNumeroRT(int numRT)
+        {
+            NumeroRT = numRT;
+        }
+        public void setFechaAlta(DateTime fechaAlta)
+        {
+            FechaAlta = fechaAlta;
+        }
+        public void setTipo(TipoRT tipo)
+        {
+            Tipo = tipo;
+        }
+        public void setTurnos(List<Turno>? turnos)
+        {
+            Turno = turnos;
+        }
+        public void setModelo(Modelo modelos)
+        {
+            Modelo = modelos;
+        }
+        public void setCambioEstadoRT(List<CambioEstadoRT> cambioEstados)
+        {
+            CambioEstado = cambioEstados;
+        }
         public void AgregarCambioEstadoRT(CambioEstadoRT cambioEstadoRT)
         {
             _cambioEstado.Add(cambioEstadoRT);
-        }        
-        
+        }
+
         public void AgregarTurno(Turno turno)
         {
-            _turno.Add(turno);
+            if (Turno != null)
+            {
+                Turno.Add(turno);
+            }
         }
 
         public void estaDisponible()
-        {
-
-        }
-        public void getNro()
-        {
-
-        }
-        public void getTipo()
-        {
-
-        }
-        public void getMarca()
-        {
-
-        }
-        public void getModelo()
         {
 
         }
@@ -50,11 +99,7 @@
         {
 
         }
-        public void obtenerDatoTurnos()
-        {
-
-        }
-        public void setEstado()
+        public void obtenerDatoTurnos() //getTurnos?
         {
 
         }

@@ -2,16 +2,28 @@
 {
     public class Marca
     {
-        private string nombre { get; set; }
+        private int _id;
+        private string _nombre;
+
+        private int Id { get { return _id; } set { _id = value; } } 
+        public string Nombre { get { return _nombre; } set { setNombre(value); } }
 
         public Marca(string nombre)
         {
-            this.nombre = nombre;
+            Nombre = nombre;
+        }
+        public int getId()
+        {
+            return Id;
+        }
+        public void setNombre(string nom)
+        {
+            Nombre = nom;
         }
 
-        public void getMarca()
+        public string getNombre() // == getMarca()
         {
-
+            return Nombre;
         }
     }
 }

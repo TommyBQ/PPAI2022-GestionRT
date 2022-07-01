@@ -2,28 +2,46 @@
 {
     public class AsignacionCientificoCI
     {
-        private DateTime fechaDesde { get; set; }
-        private DateTime? fechaHasta { get; set; }
-        private PersonalCientifico _personalCientifico { get; set; }
+        private int _id;
+        private DateTime _fechaDesde;
+        private DateTime? _fechaHasta;
+        private PersonalCientifico _personalCientifico;
+
+        public int Id { get { return _id; } set { _id = value; } }
+        public DateTime FechaDesde { get { return this._fechaDesde; } set { setFechaDesde(value); } }
+        public DateTime? FechaHasta { get { return this._fechaHasta; } set { setFechaHasta(value); } }
+        public PersonalCientifico PersonalCientifico { get { return this._personalCientifico; } set { setPersonalCientifico(value); } }
 
         public AsignacionCientificoCI(DateTime fechaDesde, DateTime? fechaHasta, PersonalCientifico personalCientifico)
         {
-            this.fechaDesde = fechaDesde;
-            this.fechaHasta = fechaHasta;
-            this._personalCientifico = personalCientifico;
+            FechaDesde = fechaDesde;
+            FechaHasta = fechaHasta;
+            PersonalCientifico = personalCientifico;
         }
+
+        private void setFechaDesde(DateTime fechaDesde)
+        {
+            FechaDesde = fechaDesde;
+        }
+
+        private void setFechaHasta(DateTime? fechaHasta)
+        {
+            FechaHasta = fechaHasta;
+        } 
 
         public void setPersonalCientifico(PersonalCientifico cientifico)
         {
-            this._personalCientifico = cientifico;
+            PersonalCientifico = cientifico;
         }
-
-        public void tenesEstosTurnos()
+        public int getId()
+        {
+            return Id;
+        }
+        public void getPersonalCientifico()
         {
 
         }
-
-        public void getPersonalCientifico()
+        public void tenesEstosTurnos()
         {
 
         }

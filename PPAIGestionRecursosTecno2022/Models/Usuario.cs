@@ -27,12 +27,21 @@
 
         public string getUsuario()
         {
-            return this._nombreUsuario;
+            return NombreUsuario;
         }
 
         public string getClave()
         {
-            return this._clave;
+            return Clave;
+        }
+
+        public int getIdUsuario(int idUser)
+        {
+            return Id_Usuario;
+        }
+        public bool getHabilitado(bool habilitado)
+        {
+            return Habilitado;
         }
 
         public void setUsuario(string nombreUser)
