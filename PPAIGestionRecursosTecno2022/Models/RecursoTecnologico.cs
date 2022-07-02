@@ -3,18 +3,22 @@
     public class RecursoTecnologico
     {
         private int _numeroRT;
+        private string _nombre;
         private DateTime _fechaAlta;
         private Modelo _modelo;
         private TipoRT _tipo;
         private List<Turno>? _turno;
         private List<CambioEstadoRT> _cambioEstado;
+        private string _imagen;
 
+        public string Nombre { get { return _nombre; } set { setNombre(value); } }
         public int NumeroRT { get { return _numeroRT; } set { setNumeroRT(value); } }
         public DateTime FechaAlta { get { return _fechaAlta; } set { setFechaAlta(value); } }
         public Modelo Modelo { get { return _modelo; } set { setModelo(value); } }
         public TipoRT Tipo { get { return _tipo; } set { setTipo(value); } }
         public List<Turno>? Turno { get { return _turno; } set { setTurnos(value); } }
         public List<CambioEstadoRT> CambioEstado { get { return _cambioEstado; } set { setCambioEstadoRT(value); } }
+        public string Imagen { get { return _imagen; } set { setImagen(value); } }
 
         public RecursoTecnologico(int numeroRT, DateTime fechaAlta, Modelo modelo, TipoRT tipo, List<Turno>? turno, List<CambioEstadoRT> cambioEstado)
         {
@@ -29,6 +33,10 @@
         public int getNumeroRT()
         {
             return NumeroRT;
+        }
+        public string getNombre()
+        {
+            return Nombre;
         }
         public DateTime getFechaAlta()
         {
@@ -54,9 +62,17 @@
         {
             return CambioEstado;
         }
+        public string getImagen()
+        {
+            return Imagen;
+        }
         public void setNumeroRT(int numRT)
         {
             NumeroRT = numRT;
+        }
+        public void setNombre(string nombre)
+        {
+            Nombre = nombre;
         }
         public void setFechaAlta(DateTime fechaAlta)
         {
@@ -77,6 +93,10 @@
         public void setCambioEstadoRT(List<CambioEstadoRT> cambioEstados)
         {
             CambioEstado = cambioEstados;
+        }
+        public void setImagen(string imagen)
+        {
+            Imagen = imagen;
         }
         public void AgregarCambioEstadoRT(CambioEstadoRT cambioEstadoRT)
         {
