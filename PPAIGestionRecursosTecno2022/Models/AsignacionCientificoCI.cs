@@ -8,40 +8,19 @@
         private PersonalCientifico _personalCientifico;
         private Turno _turno;
 
-        public int Id { get { return _id; } set { _id = value; } }
-        public DateTime FechaDesde { get { return this._fechaDesde; } set { setFechaDesde(value); } }
-        public DateTime? FechaHasta { get { return this._fechaHasta; } set { setFechaHasta(value); } }
-        public PersonalCientifico PersonalCientifico { get { return this._personalCientifico; } set { setPersonalCientifico(value); } }
-        public Turno Turno { get { return this._turno; } set { setTurno(value); } }
+        public int Id { get { return _id; } }
+        public DateTime FechaDesde { get { return _fechaDesde; } }
+        public DateTime? FechaHasta { get { return _fechaHasta; }}
+        public PersonalCientifico PersonalCientifico { get { return _personalCientifico; } }
+        public Turno Turno { get { return _turno; } }
 
-        public AsignacionCientificoCI(DateTime fechaDesde, DateTime? fechaHasta, PersonalCientifico personalCientifico)
+        public AsignacionCientificoCI(int id, DateTime fechaDesde, DateTime? fechaHasta, PersonalCientifico personalCientifico, Turno turno)
         {
-            FechaDesde = fechaDesde;
-            FechaHasta = fechaHasta;
-            PersonalCientifico = personalCientifico;
-        }
-
-        private void setFechaDesde(DateTime fechaDesde)
-        {
-            FechaDesde = fechaDesde;
-        }
-
-        private void setFechaHasta(DateTime? fechaHasta)
-        {
-            FechaHasta = fechaHasta;
-        } 
-
-        public void setPersonalCientifico(PersonalCientifico cientifico)
-        {
-            PersonalCientifico = cientifico;
-        }
-        public void setTurno(Turno turno)
-        {
-            Turno = turno;
-        }
-        public int getId()
-        {
-            return Id;
+            _id = id;
+            _fechaDesde = fechaDesde;
+            _fechaHasta = fechaHasta;
+            _personalCientifico = personalCientifico;
+            _turno = turno;
         }
         public PersonalCientifico getPersonalCientifico()
         {

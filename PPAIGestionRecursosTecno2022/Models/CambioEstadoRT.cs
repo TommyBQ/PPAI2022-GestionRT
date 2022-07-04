@@ -8,29 +8,18 @@
         private Estado _estado;
 
         public int Id { get { return _id; } set { _id = value; } }
-        public DateTime FechaHoraDesde { get { return this._fechaHoraDesde; } set { setFechaHoraDesde(value); } }
-        public DateTime? FechaHoraHasta { get { return this._fechaHoraDesde; } set { setFechaHoraHasta(value); } }
-        public Estado Estado { get { return this._estado; } set { setEstado(value); } }
+        public DateTime FechaHoraDesde { get { return this._fechaHoraDesde; } }
+        public DateTime? FechaHoraHasta { get { return this._fechaHoraDesde; } }
+        public Estado Estado { get { return this._estado; } }
 
+        public CambioEstadoRT(int id, DateTime fechaHoraDesde, DateTime? fechaHoraHasta, Estado estado)
+        {
+            Id = id;
+            _fechaHoraDesde = fechaHoraDesde;
+            _fechaHoraHasta = fechaHoraHasta;
+            _estado = estado;
+        }
 
-        public CambioEstadoRT(DateTime fechaHoraDesde, DateTime? fechaHoraHasta, Estado estado)
-        {
-            FechaHoraDesde = fechaHoraDesde;
-            FechaHoraHasta = fechaHoraHasta;
-            Estado = estado;
-        }
-        public void setFechaHoraDesde(DateTime fechaHoraDesde)
-        {
-            FechaHoraDesde = fechaHoraDesde;
-        }
-        public void setFechaHoraHasta(DateTime? fechaHoraHasta)
-        {
-            FechaHoraHasta = fechaHoraHasta;
-        }
-        public void setEstado(Estado estado)
-        {
-            Estado = estado;
-        }
         public DateTime getFechaHoraDesde()
         {
             return FechaHoraDesde;

@@ -8,36 +8,21 @@
         private PersonalCientifico _personalCientifico;
         private List<RecursoTecnologico> _recursosTecnologicos;
 
-        public int Id { get { return _id; } set { _id = value; } }
-        public DateTime FechaDesde { get { return this._fechaDesde; } set { setFechaDesde(value); } }
-        public DateTime? FechaHasta { get { return this._fechaHasta; } set { setFechaHasta(value); } }
-        public PersonalCientifico PersonalCientifico { get { return this._personalCientifico; } set { this._personalCientifico = value; } }
-        public List<RecursoTecnologico> RecursosTecnologicos { get { return this._recursosTecnologicos; } set { setRecursosTecnologicos(value); } }
-        public AsignacionResponsableTecnicoRT(DateTime fechaDesde, DateTime? fechaHasta, PersonalCientifico personalCientifico)
+        public int Id { get { return _id; } }
+        public DateTime FechaDesde { get { return this._fechaDesde; } }
+        public DateTime? FechaHasta { get { return this._fechaHasta; } }
+        public PersonalCientifico PersonalCientifico { get { return this._personalCientifico; } }
+        public List<RecursoTecnologico> RecursosTecnologicos { get { return this._recursosTecnologicos; }}
+
+        public AsignacionResponsableTecnicoRT(int id, DateTime fechaDesde, DateTime? fechaHasta, PersonalCientifico personalCientifico, List<RecursoTecnologico> recursosTecnologicos)
         {
-            FechaDesde = fechaDesde;
-            FechaHasta = fechaHasta;
-            PersonalCientifico = personalCientifico;
-            RecursosTecnologicos = new List<RecursoTecnologico>();
+            _id = id;
+            _fechaDesde = fechaDesde;
+            _fechaHasta = fechaHasta;
+            _personalCientifico = personalCientifico;
+            _recursosTecnologicos = recursosTecnologicos;
         }
 
-        public void setFechaDesde(DateTime fechaDesde)
-        {
-            FechaHasta = fechaDesde;
-        }
-        public void setPersonalCientifico(PersonalCientifico personalCientifico)
-        {
-            PersonalCientifico = personalCientifico;
-        }
-        public void setFechaHasta(DateTime? fechaHasta)
-        {
-            FechaHasta = fechaHasta;
-        }
-
-        public void setRecursosTecnologicos(List<RecursoTecnologico> recursosTecnologicos)
-        {
-            RecursosTecnologicos = recursosTecnologicos;
-        }
         public int getId()
         {
             return Id;
