@@ -13,13 +13,7 @@ namespace PPAIGestionRecursosTecno2022.Controllers
     [Route("api/[controller]")]
     public class MantenimientoRTController : ControllerBase
     {
-        public GestorMantenimiento gestorMantenimiento;
         private UsuariosDAO usuariosDAO => new UsuariosDAO();
-
-        public MantenimientoRTController()
-        {
-            this.gestorMantenimiento = new GestorMantenimiento();
-        }
 
         [HttpGet]
         [Route("Saludar")]
@@ -46,11 +40,25 @@ namespace PPAIGestionRecursosTecno2022.Controllers
             {
                 return BadRequest("No se pudo iniciar sesión. Usuario o contraseña incorrecto!");
             }
-            Usuario usuarioIniciado = usuariosDAO.getUnUsuario(usuario);
+            Usuario usuarioIniciado = usuariosDAO.getUnUsuarioXNombre(usuario);
+            SessionManager.Login(usuarioIniciado);
+
             Sesion sesion = new Sesion("Sesion del usuario: " + usuario, usuarioIniciado);
 
-            gestorMantenimiento.Sesion = sesion;
+            GestorMantenimiento.setSesion(sesion);
             return Ok(sesion);
+        }
+
+        [HttpGet]
+        [Route("BuscarRecursosDelResponsable")]
+        public void BuscarRecursosDelResponsable()
+        {
+            SessionManager sessionManager = SessionManager.GetInstance;
+
+            if (sessionManager != null)
+            {
+                GestorMantenimiento.buscarRecursosDelResponsable();
+            }
         }
     }
 }

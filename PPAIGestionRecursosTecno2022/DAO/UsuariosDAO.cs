@@ -37,21 +37,12 @@ namespace PPAIGestionRecursosTecno2022.DAO
 
         public bool ValidarUsuario(string usuario, string clave)
         {
-            using (IDbConnection conexion = new SqlConnection(cadena))
+            Usuario unUsuario = getUnUsuarioXNombre(usuario);
+            if (unUsuario != null)
             {
-                conexion.Open();
-                var values = new { usuario = usuario };
-                var unUsuario = conexion.Query("_paBuscarUnUsuario", values, commandType: CommandType.StoredProcedure).ToList();
-                if (unUsuario.Count != 0)
+                if (unUsuario.getClave() == clave)
                 {
-                    foreach (var user in unUsuario)
-                    {
-                        string claveUser = (string)user.clave;
-                        if (claveUser == clave)
-                        {
-                            return true;
-                        }
-                    }
+                    return true;
                 }
             }
             return false;
@@ -77,7 +68,7 @@ namespace PPAIGestionRecursosTecno2022.DAO
             }
         }
 
-        public Usuario getUnUsuario(string nombreUsuario)
+        public Usuario getUnUsuarioXNombre(string nombreUsuario)
         {
             using (IDbConnection conexion = new SqlConnection(cadena))
             {
@@ -86,7 +77,40 @@ namespace PPAIGestionRecursosTecno2022.DAO
                 try
                 {
                     var values = new { usuario = nombreUsuario };
-                    var usuario = conexion.Query("_paBuscarUnUsuario", values, commandType: CommandType.StoredProcedure);
+                    var usuario = conexion.Query("_paBuscarUnUsuarioPorNombre", values, commandType: CommandType.StoredProcedure);
+                    if (usuario != null)
+                    {
+                        foreach (var user in usuario)
+                        {
+                            int idUser = (int)user.id_usuario;
+                            string claveUser = (string)user.clave;
+                            string nombreUser = (string)user.usuario;
+                            bool habilitadoUser = (bool)user.habilitado;
+
+                            Usuario usuarioEncontrado = new Usuario(claveUser, nombreUser, idUser, habilitadoUser);
+                            return usuarioEncontrado;
+                        }
+                    }
+                    return new Usuario();
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("No se encontró usuario");
+                }
+
+            }
+        }
+
+        public Usuario getUnUsuarioXId(int idUs)
+        {
+            using (IDbConnection conexion = new SqlConnection(cadena))
+            {
+                conexion.Open();
+
+                try
+                {
+                    var values = new { id_usuario = idUs };
+                    var usuario = conexion.Query("_paBuscarUnUsuarioPorId", values, commandType: CommandType.StoredProcedure);
                     if (usuario != null)
                     {
                         foreach (var user in usuario)

@@ -2,28 +2,42 @@
 {
     public class PersonalCientifico
     {
-        private int _legajo;
+        private string _legajo;
         private string _nombre;
         private string _apellido;
-        private string _correo;
+        private string _numeroDocumento;
+        private string _correoInstitucional;
+        private string _correoPersonal;
+        private string _telefono;
         private int _idUsuario;
 
-        public int Legajo { get { return _legajo; } set { _legajo = value; } }
+        public string Legajo { get { return _legajo; } set { _legajo = value; } }
         public string Nombre { get { return _nombre; } set { _nombre = value; } }
         public string Apellido { get { return _apellido; } set { _apellido = value; } }
-        public string Correo { get { return _correo; } set { _correo = value; } }
+        public string NumeroDocumento { get { return _numeroDocumento; } set { _numeroDocumento = value; } }
+        public string CorreoInstitucional { get { return _correoInstitucional; } set { _correoInstitucional = value; } }
+        public string CorreoPersonal { get { return _correoPersonal; } set { _correoPersonal = value; } }
+        public string Telefono { get { return _telefono; } set { _telefono = value; } }
         public int IdUsuario { get { return _idUsuario; } set { _idUsuario = value; } }
 
-        public PersonalCientifico(int legajo, string nombre, string apellido, string correo, int idUsuario)
+        public PersonalCientifico()
+        {
+
+        }
+
+        public PersonalCientifico(string legajo, string nombre, string apellido, string numeroDocumento, string correoInstitucional, string correoPersonal, string telefono, int idUsuario)
         {
             Legajo = legajo;
             Nombre = nombre;
             Apellido = apellido;
-            Correo = correo;
+            NumeroDocumento = numeroDocumento;
+            CorreoInstitucional = correoInstitucional;
+            CorreoPersonal = correoPersonal;
+            Telefono = telefono;
             IdUsuario = idUsuario;
         }
 
-        public void setLegajo(int legajo)
+        public void setLegajo(string legajo)
         {
             Legajo = legajo;
         }
@@ -35,15 +49,19 @@
         {
             Apellido = apellido;
         }
-        public void setCorreo(string correo)
+        public void setCorreoInstitucional(string correo)
         {
-            Correo = correo;
+            CorreoInstitucional = correo;
+        }
+        public void setCorreoPersonal(string correo)
+        {
+            CorreoPersonal = correo;
         }
         public void setIdUsuario(int idUser)
         {
             IdUsuario = idUser;
         }
-        public int getLegajo()
+        public string getLegajo()
         {
             return Legajo;
         }
@@ -55,9 +73,13 @@
         {
             return Apellido;
         }
-        public string getCorreo()
+        public string getCorreoInstitucional()
         {
-            return Correo;
+            return CorreoInstitucional;
+        }
+        public string getCorreoPersonal()
+        {
+            return CorreoPersonal;
         }
         public int getIdUsuario()
         {
@@ -66,7 +88,7 @@
 
         public bool esTuUsuario(int idUsuario)
         {
-            return IdUsuario == idUsuario;
+            return SessionManager.GetUsuarioActivo().Id_Usuario == idUsuario;
         }
     }
 }

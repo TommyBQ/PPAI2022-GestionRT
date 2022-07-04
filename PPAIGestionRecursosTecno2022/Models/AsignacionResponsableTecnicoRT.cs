@@ -13,11 +13,12 @@
         public DateTime? FechaHasta { get { return this._fechaHasta; } set { setFechaHasta(value); } }
         public PersonalCientifico PersonalCientifico { get { return this._personalCientifico; } set { this._personalCientifico = value; } }
         public List<RecursoTecnologico> RecursosTecnologicos { get { return this._recursosTecnologicos; } set { setRecursosTecnologicos(value); } }
-        public AsignacionResponsableTecnicoRT(DateTime fechaDesde, DateTime? fechaHasta, List<RecursoTecnologico> recursosTecnologicos)
+        public AsignacionResponsableTecnicoRT(DateTime fechaDesde, DateTime? fechaHasta, PersonalCientifico personalCientifico)
         {
             FechaDesde = fechaDesde;
             FechaHasta = fechaHasta;
-            RecursosTecnologicos = recursosTecnologicos;
+            PersonalCientifico = personalCientifico;
+            RecursosTecnologicos = new List<RecursoTecnologico>();
         }
 
         public void setFechaDesde(DateTime fechaDesde)
@@ -64,9 +65,9 @@
             RecursosTecnologicos.Add(recurso);
         }
 
-        public void sosResponsableActual()
+        public bool sosResponsableActual(PersonalCientifico personalCientifico)
         {
-
+            return PersonalCientifico == personalCientifico;
         }
 
         public void crear()

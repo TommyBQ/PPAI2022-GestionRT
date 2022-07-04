@@ -11,8 +11,11 @@ namespace PPAIGestionRecursosTecno2022.Gestor
         private List<RecursoTecnologico> _recursos;
         private List<Turno> _turnos;
         private AsignacionCientificoCI _cientifico;
+        private PersonalCientifico _personalCientifico;
         private Sesion _sesion;
         private AsignacionCientificoCI _asignacionCientifico;
+
+        private static GestorMantenimiento _gestorMantenimientoInstance;
 
         public DateTime FechaFin { get { return _fechaFin; } set { setFechaFin(value); } }
         public string Motivo { get { return _motivo; } set { setMotivo(value); } }
@@ -21,17 +24,16 @@ namespace PPAIGestionRecursosTecno2022.Gestor
         public Sesion Sesion { get { return _sesion; } set { setSesion(value); } }
         public AsignacionCientificoCI AsignacionCientifico { get { return _cientifico; } set { setAsignacionCientifico(value); } }
 
-        public GestorMantenimiento(DateTime fechaFin, string motivo, List<RecursoTecnologico> recursos, List<Turno> turnos, AsignacionCientificoCI asignacionCientifico, Sesion sesion)
+        public static GestorMantenimiento GetInstanceGestor
         {
-            FechaFin = fechaFin;
-            Motivo = motivo;
-            Recursos = recursos;
-            Turnos = turnos;
-            AsignacionCientifico = asignacionCientifico;
-            Sesion = sesion;
+            get
+            {
+                if (_gestorMantenimientoInstance == null) throw new Exception("No se inició gestor.");
+                return _gestorMantenimientoInstance = new GestorMantenimiento();
+            }
         }
 
-        public GestorMantenimiento()
+        private GestorMantenimiento()
         {
         }
         public void setFechaFin(DateTime fechaFin)
@@ -54,9 +56,13 @@ namespace PPAIGestionRecursosTecno2022.Gestor
             _turnos = turnos;
         }
 
-        public void setSesion(Sesion sesion)
+        public static void setSesion(Sesion sesion)
         {
-            _sesion = sesion;
+            if (_gestorMantenimientoInstance == null)
+            {
+                _gestorMantenimientoInstance = new GestorMantenimiento();
+                _gestorMantenimientoInstance.Sesion = sesion;
+            }
         }
 
         public void setAsignacionCientifico(AsignacionCientificoCI asignacionCientifico)
@@ -64,11 +70,51 @@ namespace PPAIGestionRecursosTecno2022.Gestor
             _asignacionCientifico = asignacionCientifico;
         }
 
-        public void buscarRecursosDelResponsable()
+        public static void buscarRecursosDelResponsable()
         {
-            Usuario usuarioSesionActiva = Sesion.conocerUsuario();
+            PersonalCientificoDAO pcDAO = new PersonalCientificoDAO();
+            AsignacionResponsableTecnicoRTDAO asignacionResponsableTecnicoRTDAO = new AsignacionResponsableTecnicoRTDAO();
 
+            PersonalCientifico personalCientifico;
+
+            try
+            {
+                SessionManager usuarioSesionActiva = SessionManager.GetInstance;
+                List<PersonalCientifico> listAllPersonalCientifico = pcDAO.GetAllPersonalCientifico();
+                List<AsignacionResponsableTecnicoRT> listAllAsignacionResponsableTecnicoRT = asignacionResponsableTecnicoRTDAO.GetAllAsignacionResponsableTecnicoRT();
+
+                foreach (PersonalCientifico persCien in listAllPersonalCientifico)
+                {
+                    if (persCien.esTuUsuario(persCien.IdUsuario))
+                    {
+                        GestorMantenimiento.setPersonalCientifico(persCien);
+                    }
+                }
+
+                foreach (AsignacionResponsableTecnicoRT asignacion in listAllAsignacionResponsableTecnicoRT)
+                {
+                    if (asignacion.sosResponsableActual(GestorMantenimiento.getPersonalCientifico()))
+                    {
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No se pudo buscar recurso del responsable." + ex.Message);
+            }
         }
+
+        private static PersonalCientifico getPersonalCientifico()
+        {
+            return _gestorMantenimientoInstance._personalCientifico;
+        }
+
+        private static void setPersonalCientifico(PersonalCientifico persCien)
+        {
+            if (_gestorMantenimientoInstance != null )_gestorMantenimientoInstance._personalCientifico = persCien;
+        }
+
         public void buscarDatosRT()
         {
 
