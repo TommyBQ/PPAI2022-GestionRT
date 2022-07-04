@@ -10,7 +10,7 @@
         private List<Turno>? _turno;
         private List<CambioEstadoRT> _cambioEstado;
         private string _imagen;
-
+        //Se hace el get publico pero el set privado, entonces un método publico tiene que setear estas propiedades
         public string Nombre { get { return _nombre; } }
         public int NumeroRT { get { return _numeroRT; } }
         public DateTime FechaAlta { get { return _fechaAlta; } }
