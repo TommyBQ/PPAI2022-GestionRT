@@ -70,7 +70,7 @@ namespace PPAIGestionRecursosTecno2022.Gestor
             _asignacionCientifico = asignacionCientifico;
         }
 
-        public static void buscarRecursosDelResponsable()
+        public static PersonalCientifico buscarRecursosDelResponsable()
         {
             PersonalCientificoDAO pcDAO = new PersonalCientificoDAO();
             AsignacionResponsableTecnicoRTDAO asignacionResponsableTecnicoRTDAO = new AsignacionResponsableTecnicoRTDAO();
@@ -79,25 +79,29 @@ namespace PPAIGestionRecursosTecno2022.Gestor
 
             try
             {
-                SessionManager usuarioSesionActiva = SessionManager.GetInstance;
-                List<PersonalCientifico> listAllPersonalCientifico = pcDAO.GetAllPersonalCientifico();
-                List<AsignacionResponsableTecnicoRT> listAllAsignacionResponsableTecnicoRT = asignacionResponsableTecnicoRTDAO.GetAllAsignacionResponsableTecnicoRT();
+                Usuario usuarioSesionActiva = SessionManager.conocerUsuario();
 
+                List<PersonalCientifico> listAllPersonalCientifico = pcDAO.GetAllPersonalCientifico();
                 foreach (PersonalCientifico persCien in listAllPersonalCientifico)
                 {
-                    if (persCien.esTuUsuario(persCien.IdUsuario))
+                    if (persCien.esTuUsuario(persCien.Usuario))
                     {
                         GestorMantenimiento.setPersonalCientifico(persCien);
+                        return GestorMantenimiento.getPersonalCientifico();
                     }
                 }
+
+                List<AsignacionResponsableTecnicoRT> listAllAsignacionResponsableTecnicoRT = asignacionResponsableTecnicoRTDAO.GetAllAsignacionResponsableTecnicoRT();
 
                 foreach (AsignacionResponsableTecnicoRT asignacion in listAllAsignacionResponsableTecnicoRT)
                 {
                     if (asignacion.sosResponsableActual(GestorMantenimiento.getPersonalCientifico()))
                     {
-
+                        List<RecursoTecnologico> rtAsignacionActual = asignacion.getRecursosTecnologicos();
                     }
                 }
+
+                return new PersonalCientifico();
             }
             catch (Exception ex)
             {

@@ -27,8 +27,8 @@ namespace PPAIGestionRecursosTecno2022.DAO
                         string nombreUser = (string)user.usuario;
                         bool habilitadoUser = (bool)user.habilitado;
 
-                        Usuario usuario = new Usuario(claveUser, nombreUser, idUser, habilitadoUser);
-                        allUsers.Add(usuario);
+                        //Usuario usuario = new Usuario(claveUser, nombreUser, idUser, habilitadoUser);
+                        //allUsers.Add(usuario);
                     }
                 }
                 return allUsers;
@@ -87,8 +87,8 @@ namespace PPAIGestionRecursosTecno2022.DAO
                             string nombreUser = (string)user.usuario;
                             bool habilitadoUser = (bool)user.habilitado;
 
-                            Usuario usuarioEncontrado = new Usuario(claveUser, nombreUser, idUser, habilitadoUser);
-                            return usuarioEncontrado;
+                            //Usuario usuarioEncontrado = new Usuario(claveUser, nombreUser, idUser, habilitadoUser);
+                            //return usuarioEncontrado;
                         }
                     }
                     return new Usuario();
@@ -120,8 +120,8 @@ namespace PPAIGestionRecursosTecno2022.DAO
                             string nombreUser = (string)user.usuario;
                             bool habilitadoUser = (bool)user.habilitado;
 
-                            Usuario usuarioEncontrado = new Usuario(claveUser, nombreUser, idUser, habilitadoUser);
-                            return usuarioEncontrado;
+                            //Usuario usuarioEncontrado = new Usuario(claveUser, nombreUser, idUser, habilitadoUser);
+                            //return usuarioEncontrado;
                         }
                     }
                     return new Usuario();

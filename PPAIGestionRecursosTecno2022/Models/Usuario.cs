@@ -12,7 +12,7 @@
         public int Id_Usuario { get { return _id_usuario; } set { setIdUsuario(value); } }
         public bool Habilitado { get { return _habilitado; } set { setHabilitado(value); } }
 
-        public Usuario(string clave, string usuario, int idUsuario, bool habilitado)
+        public Usuario(int idUsuario, string usuario, string clave, bool habilitado)
         {
             Clave = clave;
             NombreUsuario = usuario;
@@ -59,8 +59,8 @@
             _id_usuario = idUser;
         }
         public void setHabilitado(bool habilitado)
-        { 
-            _habilitado = habilitado; 
+        {
+            _habilitado = habilitado;
         }
     }
 }

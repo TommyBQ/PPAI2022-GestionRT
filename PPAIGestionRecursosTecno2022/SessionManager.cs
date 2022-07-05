@@ -42,7 +42,7 @@ namespace PPAIGestionRecursosTecno2022
             }
         }
 
-        public static Usuario GetUsuarioActivo()
+        public static Usuario conocerUsuario()
         {
             if (_session != null)
             {

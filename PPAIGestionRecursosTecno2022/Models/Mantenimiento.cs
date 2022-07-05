@@ -6,18 +6,20 @@
         private DateTime _fechaInicio;
         private DateTime _fechaInicioPrevista;
         private string _motivoMantenimiento;
+        private RecursoTecnologico _recursoTecnologico;
 
         public DateTime FechaFin { get { return _fechaFin; } set { _fechaFin = value; } }
         public DateTime FechaInicio { get { return _fechaInicio; } set { _fechaInicio = value; } }
         public DateTime FechaInicioPrevista { get { return _fechaInicioPrevista; } set { _fechaInicioPrevista = value; } }
         public string MotivoMantenimiento { get { return _motivoMantenimiento; } set { _motivoMantenimiento = value; } }
 
-        public Mantenimiento(DateTime fechaFin, DateTime fechaInicio, DateTime fechaInicioPrevista, string motivoMantenimiento)
+        public Mantenimiento(DateTime fechaFin, DateTime fechaInicio, DateTime fechaInicioPrevista, string motivoMantenimiento, RecursoTecnologico recursoTecnologico)
         {
             FechaFin = fechaFin;
             FechaInicio = fechaInicio;
             FechaInicioPrevista = fechaInicioPrevista;
             MotivoMantenimiento = motivoMantenimiento;
+            _recursoTecnologico = recursoTecnologico;
         }
 
         public void setFechaFin()

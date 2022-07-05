@@ -76,7 +76,7 @@
         }
         public void AgregarCambioEstadoTurno(CambioEstadoTurno cambioEstadoTurno)
         {
-            CambiosEstadoTurno.Add(cambioEstadoTurno);
+            _cambiosEstadoTurno.Add(cambioEstadoTurno);
         }
 
         public void existenTurnos()

@@ -6,6 +6,7 @@ using PPAIGestionRecursosTecno2022.Gestor;
 using PPAIGestionRecursosTecno2022.Models;
 using PPAIGestionRecursosTecno2022.Exceptions;
 using System.Data;
+using PPAIGestionRecursosTecno2022.Repositorios;
 
 namespace PPAIGestionRecursosTecno2022.Controllers
 {
@@ -14,6 +15,12 @@ namespace PPAIGestionRecursosTecno2022.Controllers
     public class MantenimientoRTController : ControllerBase
     {
         private UsuariosDAO usuariosDAO => new UsuariosDAO();
+        private readonly IRepository _irepository;
+
+        public MantenimientoRTController(IRepository usRepo)
+        {
+            _irepository = usRepo;
+        }
 
         [HttpGet]
         [Route("Saludar")]
@@ -51,14 +58,25 @@ namespace PPAIGestionRecursosTecno2022.Controllers
 
         [HttpGet]
         [Route("BuscarRecursosDelResponsable")]
-        public void BuscarRecursosDelResponsable()
+        public IActionResult buscarRecursosDelResponsable()
         {
             SessionManager sessionManager = SessionManager.GetInstance;
 
             if (sessionManager != null)
             {
-                GestorMantenimiento.buscarRecursosDelResponsable();
+                return Ok(GestorMantenimiento.buscarRecursosDelResponsable());
             }
+
+            return BadRequest("");
+        }
+        
+        [HttpGet]
+        [Route("Test")]
+        public async Task<IActionResult> Testeo()
+        {
+            var usuarios = await _irepository.GetAll();
+            return Ok(usuarios);
         }
     }
+
 }

@@ -9,7 +9,7 @@
         private string _correoInstitucional;
         private string _correoPersonal;
         private string _telefono;
-        private int _idUsuario;
+        private Usuario _usuario;
 
         public string Legajo { get { return _legajo; } set { _legajo = value; } }
         public string Nombre { get { return _nombre; } set { _nombre = value; } }
@@ -18,14 +18,14 @@
         public string CorreoInstitucional { get { return _correoInstitucional; } set { _correoInstitucional = value; } }
         public string CorreoPersonal { get { return _correoPersonal; } set { _correoPersonal = value; } }
         public string Telefono { get { return _telefono; } set { _telefono = value; } }
-        public int IdUsuario { get { return _idUsuario; } set { _idUsuario = value; } }
+        public Usuario Usuario { get { return _usuario; } set { _usuario = value; } }
 
         public PersonalCientifico()
         {
 
         }
 
-        public PersonalCientifico(string legajo, string nombre, string apellido, string numeroDocumento, string correoInstitucional, string correoPersonal, string telefono, int idUsuario)
+        public PersonalCientifico(string legajo, string nombre, string apellido, string numeroDocumento, string correoInstitucional, string correoPersonal, string telefono, Usuario usuario)
         {
             Legajo = legajo;
             Nombre = nombre;
@@ -34,7 +34,7 @@
             CorreoInstitucional = correoInstitucional;
             CorreoPersonal = correoPersonal;
             Telefono = telefono;
-            IdUsuario = idUsuario;
+            Usuario = usuario;
         }
 
         public void setLegajo(string legajo)
@@ -57,9 +57,9 @@
         {
             CorreoPersonal = correo;
         }
-        public void setIdUsuario(int idUser)
+        public void setIdUsuario(Usuario idUser)
         {
-            IdUsuario = idUser;
+            Usuario = idUser;
         }
         public string getLegajo()
         {
@@ -81,14 +81,14 @@
         {
             return CorreoPersonal;
         }
-        public int getIdUsuario()
+        public Usuario getUsuario()
         {
-            return IdUsuario;
+            return Usuario;
         }
 
-        public bool esTuUsuario(int idUsuario)
+        public bool esTuUsuario(Usuario user)
         {
-            return SessionManager.GetUsuarioActivo().Id_Usuario == idUsuario;
+            return getUsuario() == user;
         }
     }
 }

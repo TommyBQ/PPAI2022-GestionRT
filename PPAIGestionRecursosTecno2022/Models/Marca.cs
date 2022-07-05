@@ -2,28 +2,28 @@
 {
     public class Marca
     {
-        private int _id;
         private string _nombre;
+        private List<Modelo> _modeloList;
 
-        private int Id { get { return _id; } set { _id = value; } } 
-        public string Nombre { get { return _nombre; } set { setNombre(value); } }
+        public string Nombre { get { return _nombre; } }
+        public List<Modelo> ModeloList { get { return _modeloList; } }
 
         public Marca(string nombre)
         {
-            Nombre = nombre;
+            _nombre = nombre;
         }
-        public int getId()
-        {
-            return Id;
-        }
-        public void setNombre(string nom)
-        {
-            Nombre = nom;
-        }
-
         public string getNombre() // == getMarca()
         {
             return Nombre;
+        }
+
+        public void agregarModelo(Modelo model)
+        {
+            if (_modeloList == null)
+            {
+                _modeloList = new List<Modelo>();
+            }
+            _modeloList.Add(model);
         }
     }
 }

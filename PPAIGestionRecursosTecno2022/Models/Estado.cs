@@ -6,30 +6,22 @@
         private string _nombre;
         private string _descripcion;
         private string _ambito;
+        private bool _esReservable;
+        private bool _esCancelable;
 
-        private int Id { get { return _id; } set { _id = value; } }
-        public string Nombre { get { return _nombre; } set { setNombre(value); } }
-        public string Descripcion { get { return _descripcion; } set { setDescripcion(value); } }
-        public string Ambito { get { return _ambito; } set { setAmbito(value); } }
+        private int Id { get { return _id; } }
+        public string Nombre { get { return _nombre; } }
+        public string Descripcion { get { return _descripcion; } }
+        public string Ambito { get { return _ambito; } }
 
-        public Estado(string nombre, string descripcion)
+        public Estado(int id, string nombre, string descripcion, string ambito, bool esReservable, bool esCancelable)
         {
-            Nombre = nombre;
-            Descripcion = descripcion;
-        }
-
-        public void setNombre(string nombre)
-        {
-            Nombre = nombre;
-        }
-
-        public void setDescripcion(string descrip)
-        {
-            Descripcion = descrip;
-        }
-        public void setAmbito(string ambito)
-        {
-            Ambito = ambito;
+            _id = id;
+            _nombre = nombre;
+            _descripcion = descripcion;
+            _ambito = ambito;
+            _esReservable = esReservable;
+            _esCancelable = esCancelable;
         }
 
         public int getId()

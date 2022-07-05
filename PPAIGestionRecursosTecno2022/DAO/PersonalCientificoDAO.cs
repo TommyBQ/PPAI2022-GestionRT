@@ -8,6 +8,7 @@ namespace PPAIGestionRecursosTecno2022.DAO
     public class PersonalCientificoDAO
     {
         private string cadena { get { return "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=PPAI_2022;Integrated Security=True"; } }
+        private UsuariosDAO usuariosDAO => new UsuariosDAO();
 
         public List<PersonalCientifico> GetAllPersonalCientifico()
         {
@@ -31,7 +32,9 @@ namespace PPAIGestionRecursosTecno2022.DAO
                         string telefono = (string)pC.Telefono;
                         int idUsuario = (int)pC.idUsuario;
 
-                        PersonalCientifico pc = new PersonalCientifico(legajo, nombre, apellido, numeroDocumento, correoInstitucional, correoPersonal, telefono, idUsuario);
+                        Usuario usr = usuariosDAO.getUnUsuarioXId(idUsuario);
+
+                        PersonalCientifico pc = new PersonalCientifico(legajo, nombre, apellido, numeroDocumento, correoInstitucional, correoPersonal, telefono, usr);
                         allPC.Add(pc);
                     }
                 }
@@ -62,8 +65,8 @@ namespace PPAIGestionRecursosTecno2022.DAO
                             string telefono = (string)pC.Telefono;
                             int idUsuario = (int)pC.idUsuario;
 
-                            PersonalCientifico pcEncontrado = new PersonalCientifico(legajo, nombre, apellido, numeroDocumento, correoInstitucional, correoPersonal, telefono, idUsuario);
-                            return pcEncontrado;
+                            //PersonalCientifico pcEncontrado = new PersonalCientifico(legajo, nombre, apellido, numeroDocumento, correoInstitucional, correoPersonal, telefono, idUsuario);
+                            //return pcEncontrado;
                         }
                     }
                     return new PersonalCientifico();

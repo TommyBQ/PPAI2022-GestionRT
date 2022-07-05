@@ -9,6 +9,7 @@ namespace PPAIGestionRecursosTecno2022.DAO
     {
         private string cadena { get { return "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=PPAI_2022;Integrated Security=True"; } }
         private PersonalCientificoDAO personalCientificoDAO => new PersonalCientificoDAO();
+        private RecursoTecnologicoDAO recursoTecnologicoDAO => new RecursoTecnologicoDAO();
 
         public List<AsignacionResponsableTecnicoRT> GetAllAsignacionResponsableTecnicoRT()
         {
@@ -31,9 +32,11 @@ namespace PPAIGestionRecursosTecno2022.DAO
 
                         PersonalCientifico cientifico = personalCientificoDAO.getUnPersonalCientificoXId(legajoPC);
 
-                        AsignacionResponsableTecnicoRT asignacionAGuardar = new AsignacionResponsableTecnicoRT(fechaDesde, fechaHasta, cientifico);
+                        //RecursoTecnologico recursoTecnologico = recursoTecnologicoDAO.getUnRecursoTecnologicoXId(idRT);
 
-                        allAsignaciones.Add(asignacionAGuardar);
+                        //AsignacionResponsableTecnicoRT asignacionAGuardar = new AsignacionResponsableTecnicoRT(fechaDesde, fechaHasta, cientifico);
+
+                        //allAsignaciones.Add(asignacionAGuardar);
                     }
                 }
                 return allAsignaciones;
