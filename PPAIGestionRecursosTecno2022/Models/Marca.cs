@@ -10,8 +10,9 @@
         public string Nombre { get { return _nombre; } }
         public List<Modelo> ModeloList { get { return _modeloList; } }
 
-        public Marca(string nombre)
+        public Marca(int id, string nombre)
         {
+            _id = id;
             _nombre = nombre;
         }
         public string getNombre() // == getMarca()

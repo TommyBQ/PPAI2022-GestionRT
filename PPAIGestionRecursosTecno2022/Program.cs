@@ -1,5 +1,6 @@
 
 using PPAIGestionRecursosTecno2022;
+using PPAIGestionRecursosTecno2022.DB;
 using PPAIGestionRecursosTecno2022.Models;
 using PPAIGestionRecursosTecno2022.Services;
 
@@ -41,5 +42,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+DB.Instance.cargarDatos(); //SE CARGAN LOS DATOS!
 
 app.Run();
