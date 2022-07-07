@@ -2,40 +2,21 @@
 {
     public class Modelo
     {
-        private string nombre;
-        //private List<Marca>? _marcas;
+        private int _id;
+        private string _nombre;
 
-        public string Nombre { get { return nombre; } set { setNombre(value); } }
-        //public List<Marca>? Marcas { get { return _marcas; } set { setMarcas(value); } }
+        public int Id { get { return _id; } }
+        public string Nombre { get { return _nombre; } }
 
-        public Modelo(string nombre)
+        public Modelo(int id, string nombre)
         {
-            Nombre = nombre;
-            //Marcas = marca;
+            _id = id;
+            _nombre = nombre;
         }
-        public void setNombre(string nombre)
-        {
-            Nombre = nombre;
-        }
-
-        //public void setMarcas(List<Marca> marcas)
-        //{
-        //    Marcas = marcas;
-        //}
 
         public string getNombre()
         {
             return Nombre;
         }
-
-        //public List<Marca> getMarcas()
-        //{
-        //    return Marcas;
-        //}
-
-        //public void AgregarMarca(Marca marca)
-        //{
-        //    Marcas.Add(marca);
-        //}
     }
 }

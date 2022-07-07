@@ -2,9 +2,11 @@
 {
     public class Marca
     {
+        private int _id;
         private string _nombre;
         private List<Modelo> _modeloList;
 
+        public int Id { get { return _id; } }
         public string Nombre { get { return _nombre; } }
         public List<Modelo> ModeloList { get { return _modeloList; } }
 

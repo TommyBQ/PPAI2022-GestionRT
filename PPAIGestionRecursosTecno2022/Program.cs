@@ -1,6 +1,7 @@
+
 using PPAIGestionRecursosTecno2022;
 using PPAIGestionRecursosTecno2022.Models;
-using PPAIGestionRecursosTecno2022.Repositorios;
+using PPAIGestionRecursosTecno2022.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,8 +12,20 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<GestionRTContext>();
-builder.Services.AddScoped<IRepository, UsuariosRepository>();
+builder.Services.AddScoped<IGenericService<AsignacionCientificoCI>, AsignacionCientificoCIService>();
+builder.Services.AddScoped<IGenericService<AsignacionResponsableTecnicoRT>, AsignacionResponsableTecnicoRTService>();
+builder.Services.AddScoped<IGenericService<CambioEstadoRT>, CambioEstadoRTService>();
+builder.Services.AddScoped<IGenericService<CambioEstadoTurno>, CambioEstadoTurnoService>();
+builder.Services.AddScoped<IGenericService<Estado>, EstadoService>();
+builder.Services.AddScoped<IGenericService<Mantenimiento>, MantenimientoService>();
+builder.Services.AddScoped<IGenericService<Marca>, MarcaService>();
+builder.Services.AddScoped<IGenericService<Modelo>, ModeloService>();
+builder.Services.AddScoped<IGenericService<PersonalCientifico>, PersonalCientificoService>();
+builder.Services.AddScoped<IGenericService<RecursoTecnologico>, RecursoTecnologicoService>();
+builder.Services.AddScoped<IGenericService<Sesion>, SesionService>();
+builder.Services.AddScoped<IGenericService<TipoRT>, TipoRTService>();
+builder.Services.AddScoped<IGenericService<Turno>, TurnoService>();
+builder.Services.AddScoped<IGenericService<Usuario>, UsuarioService>();
 
 var app = builder.Build();
 

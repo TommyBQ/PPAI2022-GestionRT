@@ -9,7 +9,7 @@
         private bool _esReservable;
         private bool _esCancelable;
 
-        private int Id { get { return _id; } }
+        public int Id { get { return _id; } }
         public string Nombre { get { return _nombre; } }
         public string Descripcion { get { return _descripcion; } }
         public string Ambito { get { return _ambito; } }

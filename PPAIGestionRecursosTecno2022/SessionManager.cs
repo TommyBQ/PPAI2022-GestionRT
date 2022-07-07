@@ -2,6 +2,8 @@
 
 namespace PPAIGestionRecursosTecno2022
 {
+    // Esto es puramente un patrón SINGLETON. Es decir que, solo puede tener una instancia para TODA la aplicacion.
+    // Que se comporte asi permite que en cualquier clase podamos conocer qué usuario inició sesión y podremos loguear y desloguear.
     public class SessionManager
     {
         private static SessionManager _session;

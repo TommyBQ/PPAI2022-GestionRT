@@ -1,6 +1,5 @@
-﻿using PPAIGestionRecursosTecno2022.DAO;
-using PPAIGestionRecursosTecno2022.Exceptions;
-using PPAIGestionRecursosTecno2022.Models;
+﻿using PPAIGestionRecursosTecno2022.Models;
+using PPAIGestionRecursosTecno2022.Services;
 
 namespace PPAIGestionRecursosTecno2022.Gestor
 {
@@ -17,106 +16,35 @@ namespace PPAIGestionRecursosTecno2022.Gestor
 
         private static GestorMantenimiento _gestorMantenimientoInstance;
 
-        public DateTime FechaFin { get { return _fechaFin; } set { setFechaFin(value); } }
-        public string Motivo { get { return _motivo; } set { setMotivo(value); } }
-        public List<RecursoTecnologico> Recursos { get { return _recursos; } set { setRecursos(value); } }
-        public List<Turno> Turnos { get { return _turnos; } set { setTurnos(value); } }
-        public Sesion Sesion { get { return _sesion; } set { setSesion(value); } }
-        public AsignacionCientificoCI AsignacionCientifico { get { return _cientifico; } set { setAsignacionCientifico(value); } }
+        public DateTime FechaFin { get { return _fechaFin; } }
+        public string Motivo { get { return _motivo; } }
+        public List<RecursoTecnologico> Recursos { get { return _recursos; } }
+        public List<Turno> Turnos { get { return _turnos; } }
+        public Sesion Sesion { get { return _sesion; } }
+        public AsignacionCientificoCI AsignacionCientifico { get { return _cientifico; } }
 
         public static GestorMantenimiento GetInstanceGestor
         {
             get
             {
-                if (_gestorMantenimientoInstance == null) throw new Exception("No se inició gestor.");
-                return _gestorMantenimientoInstance = new GestorMantenimiento();
+                if (_gestorMantenimientoInstance == null) _gestorMantenimientoInstance = new GestorMantenimiento();
+                return _gestorMantenimientoInstance;
             }
         }
 
-        private GestorMantenimiento()
-        {
-        }
-        public void setFechaFin(DateTime fechaFin)
-        {
-            _fechaFin = fechaFin;
-        }
-
-        public void setMotivo(string motivo)
-        {
-            _motivo = motivo;
-        }
-
-        public void setRecursos(List<RecursoTecnologico> recursosTecnologicos)
-        {
-            _recursos = recursosTecnologicos;
-        }
-
-        public void setTurnos(List<Turno> turnos)
-        {
-            _turnos = turnos;
-        }
 
         public static void setSesion(Sesion sesion)
         {
             if (_gestorMantenimientoInstance == null)
             {
                 _gestorMantenimientoInstance = new GestorMantenimiento();
-                _gestorMantenimientoInstance.Sesion = sesion;
+                _gestorMantenimientoInstance._sesion = sesion;
             }
         }
 
-        public void setAsignacionCientifico(AsignacionCientificoCI asignacionCientifico)
+        public static void buscarRecursosDelResponsable()
         {
-            _asignacionCientifico = asignacionCientifico;
-        }
 
-        public static PersonalCientifico buscarRecursosDelResponsable()
-        {
-            PersonalCientificoDAO pcDAO = new PersonalCientificoDAO();
-            AsignacionResponsableTecnicoRTDAO asignacionResponsableTecnicoRTDAO = new AsignacionResponsableTecnicoRTDAO();
-
-            PersonalCientifico personalCientifico;
-
-            try
-            {
-                Usuario usuarioSesionActiva = SessionManager.conocerUsuario();
-
-                List<PersonalCientifico> listAllPersonalCientifico = pcDAO.GetAllPersonalCientifico();
-                foreach (PersonalCientifico persCien in listAllPersonalCientifico)
-                {
-                    if (persCien.esTuUsuario(persCien.Usuario))
-                    {
-                        GestorMantenimiento.setPersonalCientifico(persCien);
-                        return GestorMantenimiento.getPersonalCientifico();
-                    }
-                }
-
-                List<AsignacionResponsableTecnicoRT> listAllAsignacionResponsableTecnicoRT = asignacionResponsableTecnicoRTDAO.GetAllAsignacionResponsableTecnicoRT();
-
-                foreach (AsignacionResponsableTecnicoRT asignacion in listAllAsignacionResponsableTecnicoRT)
-                {
-                    if (asignacion.sosResponsableActual(GestorMantenimiento.getPersonalCientifico()))
-                    {
-                        List<RecursoTecnologico> rtAsignacionActual = asignacion.getRecursosTecnologicos();
-                    }
-                }
-
-                return new PersonalCientifico();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("No se pudo buscar recurso del responsable." + ex.Message);
-            }
-        }
-
-        private static PersonalCientifico getPersonalCientifico()
-        {
-            return _gestorMantenimientoInstance._personalCientifico;
-        }
-
-        private static void setPersonalCientifico(PersonalCientifico persCien)
-        {
-            if (_gestorMantenimientoInstance != null )_gestorMantenimientoInstance._personalCientifico = persCien;
         }
 
         public void buscarDatosRT()
@@ -162,34 +90,6 @@ namespace PPAIGestionRecursosTecno2022.Gestor
         public void finCU()
         {
 
-        }
-
-        public DateTime getFechaFin(DateTime fechaFin)
-        {
-            return FechaFin;
-        }
-
-        public string getMotivo(string motivo)
-        {
-            return Motivo;
-        }
-
-        public List<RecursoTecnologico> getRecursos(List<RecursoTecnologico> recursosTecnologicos)
-        {
-            return Recursos;
-        }
-
-        public List<Turno> getTurnos(List<Turno> turnos)
-        {
-            return Turnos;
-        }
-        public Sesion getSesion()
-        {
-            return Sesion;
-        }
-        public AsignacionCientificoCI getAsignacionCientifico(AsignacionCientificoCI asignacionCientifico)
-        {
-            return AsignacionCientifico;
         }
 
     }

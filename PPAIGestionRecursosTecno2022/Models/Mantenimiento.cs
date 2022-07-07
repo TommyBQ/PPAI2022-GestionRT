@@ -2,23 +2,26 @@
 {
     public class Mantenimiento
     {
+        private int _id;
         private DateTime _fechaFin;
         private DateTime _fechaInicio;
         private DateTime _fechaInicioPrevista;
         private string _motivoMantenimiento;
         private RecursoTecnologico _recursoTecnologico;
 
-        public DateTime FechaFin { get { return _fechaFin; } set { _fechaFin = value; } }
-        public DateTime FechaInicio { get { return _fechaInicio; } set { _fechaInicio = value; } }
-        public DateTime FechaInicioPrevista { get { return _fechaInicioPrevista; } set { _fechaInicioPrevista = value; } }
-        public string MotivoMantenimiento { get { return _motivoMantenimiento; } set { _motivoMantenimiento = value; } }
+        public int Id { get { return _id; } }
+        public DateTime FechaFin { get { return _fechaFin; }}
+        public DateTime FechaInicio { get { return _fechaInicio; } }
+        public DateTime FechaInicioPrevista { get { return _fechaInicioPrevista; } }
+        public string MotivoMantenimiento { get { return _motivoMantenimiento; } }
 
-        public Mantenimiento(DateTime fechaFin, DateTime fechaInicio, DateTime fechaInicioPrevista, string motivoMantenimiento, RecursoTecnologico recursoTecnologico)
+        public Mantenimiento(int id, DateTime fechaFin, DateTime fechaInicio, DateTime fechaInicioPrevista, string motivoMantenimiento, RecursoTecnologico recursoTecnologico)
         {
-            FechaFin = fechaFin;
-            FechaInicio = fechaInicio;
-            FechaInicioPrevista = fechaInicioPrevista;
-            MotivoMantenimiento = motivoMantenimiento;
+            _id = id;
+            _fechaFin = fechaFin;
+            _fechaInicio = fechaInicio;
+            _fechaInicioPrevista = fechaInicioPrevista;
+            _motivoMantenimiento = motivoMantenimiento;
             _recursoTecnologico = recursoTecnologico;
         }
 

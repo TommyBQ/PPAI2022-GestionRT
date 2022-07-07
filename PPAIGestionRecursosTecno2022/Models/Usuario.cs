@@ -2,27 +2,22 @@
 {
     public class Usuario
     {
+        private int _id_usuario;
         private string _clave;
         private string _nombreUsuario;
-        private int _id_usuario;
         private bool _habilitado;
 
-        public string Clave { get { return _clave; } set { setClave(value); } }
-        public string NombreUsuario { get { return _nombreUsuario; } set { setUsuario(value); } }
-        public int Id_Usuario { get { return _id_usuario; } set { setIdUsuario(value); } }
-        public bool Habilitado { get { return _habilitado; } set { setHabilitado(value); } }
+        public int Id_Usuario { get { return _id_usuario; }}
+        public string Clave { get { return _clave; } }
+        public string NombreUsuario { get { return _nombreUsuario; } }
+        public bool Habilitado { get { return _habilitado; } }
 
-        public Usuario(int idUsuario, string usuario, string clave, bool habilitado)
+        public Usuario(int id_usuario, string clave, string nombreUsuario, bool habilitado)
         {
-            Clave = clave;
-            NombreUsuario = usuario;
-            Id_Usuario = idUsuario;
-            Habilitado = habilitado;
-        }
-
-        public Usuario()
-        {
-
+            _id_usuario = id_usuario;
+            _clave = clave;
+            _nombreUsuario = nombreUsuario;
+            _habilitado = habilitado;
         }
 
         public string getUsuario()
