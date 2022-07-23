@@ -466,15 +466,16 @@ export default {
     iniciarSesion(user, psswd) {
       axios
         .get(
-          "api/MantenimientoRT/IniciarSesion?usuario=" +
+          "api/Usuarios/Login?nombreUsuario=" +
             user +
-            "+&clave=" +
+            "+&password=" +
             psswd
         )
         .then((response) => {
-          console.log(response.data);
+          console.log("response.data login:");
+          console.log(response);
           if (response.data != null) {
-            this.$store.dispatch("iniciarSesion", response.data.usuario.nombreUsuario);
+            this.$store.dispatch("iniciarSesion", response.data.nombreUsuario);
             this.$router.push("/");
             this.$notify({
               group: "toasts",
@@ -485,14 +486,16 @@ export default {
           } else {
             alert("Usuario o contraseña incorrectos");
           }
-        }).catch((error) => {
-          this.$notify({
-              group: "toasts",
-              title: "Inicio de sesión",
-              type: "error",
-              text: error.response.data,
-            });
-        });
+        })
+        // ).catch((error) => {
+        //   this.$notify({
+        //       group: "toasts",
+        //       title: "Inicio de sesión",
+        //       type: "error",
+        //       text: error,
+        //     });
+        // });
+    // }
     },
     registrar() {
       axios

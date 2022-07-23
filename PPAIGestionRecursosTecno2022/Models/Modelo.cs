@@ -18,5 +18,24 @@
         {
             return Nombre;
         }
+
+        public string getMarca(List<Marca> marcas)
+        {
+            string nombreMarca = "";
+
+            foreach (Marca marca in marcas)
+            {
+                foreach (Modelo modelo in marca.ModeloList)
+                {
+                    if (modelo.Nombre == _nombre)
+                    {
+                        nombreMarca = marca.Nombre;
+                        break;
+                    }
+                }
+            }
+
+            return nombreMarca;
+        }
     }
 }

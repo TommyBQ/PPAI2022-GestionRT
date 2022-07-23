@@ -15,6 +15,7 @@
             _id = id;
             _nombre = nombre;
         }
+
         public string getNombre() // == getMarca()
         {
             return Nombre;

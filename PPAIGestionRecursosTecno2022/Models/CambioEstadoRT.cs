@@ -37,9 +37,14 @@
             return Estado;
         }
 
-        public void sosEstadoActual()
+        public bool sosEstadoActual()
         {
+            return _fechaHoraHasta == null;
+        }
 
+        public bool estaDisponible()
+        {
+            return Estado.esDisponible();
         }
     }
 }

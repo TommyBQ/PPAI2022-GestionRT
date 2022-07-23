@@ -1,4 +1,6 @@
-﻿namespace PPAIGestionRecursosTecno2022.Models
+﻿using PPAIGestionRecursosTecno2022.Gestor;
+
+namespace PPAIGestionRecursosTecno2022.Models
 {
     public class RecursoTecnologico
     {
@@ -9,7 +11,6 @@
         private TipoRT _tipo;
         private List<Turno>? _turno;
         private List<CambioEstadoRT> _cambioEstado;
-        private Mantenimiento _mantenimiento;
         private string _imagen;
         //Se hace el get publico pero el set privado, entonces un método publico tiene que setear estas propiedades
         public string Nombre { get { return _nombre; } }
@@ -19,10 +20,9 @@
         public TipoRT Tipo { get { return _tipo; } }
         public List<Turno>? Turno { get { return _turno; } }
         public List<CambioEstadoRT> CambioEstado { get { return _cambioEstado; } }
-        public Mantenimiento Mantenimiento { get { return _mantenimiento; } }
         public string Imagen { get { return _imagen; } }
 
-        public RecursoTecnologico(int numeroRT, string nombre, DateTime? fechaAlta, Modelo modelo, TipoRT tipo, List<Turno>? turno, List<CambioEstadoRT> cambioEstado,Mantenimiento mantenimiento, string imagen)
+        public RecursoTecnologico(int numeroRT, string nombre, DateTime? fechaAlta, Modelo modelo, TipoRT tipo, List<Turno>? turno, List<CambioEstadoRT> cambioEstado, string imagen)
         {
             _numeroRT = numeroRT;
             _nombre = nombre;
@@ -31,7 +31,6 @@
             _tipo = tipo;
             _turno = turno;
             _cambioEstado = cambioEstado;
-            _mantenimiento = mantenimiento;
             _imagen = imagen;
         }
         public void AgregarCambioEstadoRT(CambioEstadoRT cambioEstadoRT)
@@ -47,9 +46,23 @@
             }
         }
 
-        public void estaDisponible()
+        public bool estaDisponible()
         {
+            bool soyDisponible = false;
 
+            foreach (CambioEstadoRT cambioEstados in CambioEstado)
+            {
+                if (cambioEstados.sosEstadoActual())
+                {
+                    if (cambioEstados.estaDisponible())
+                    {
+                        soyDisponible = true;
+                        break;
+                    }
+                }
+            }
+
+            return soyDisponible;
         }
         public void tenesTurnosCOnfirmadosOPendientes()
         {
@@ -58,6 +71,38 @@
         public void obtenerDatoTurnos() //getTurnos?
         {
 
+        }
+
+        private int getNro()
+        {
+            return NumeroRT;
+        }
+
+        private string getNombre()
+        {
+            return Nombre;
+        }
+
+        private string getMarca()
+        {
+            
+        }
+
+        public string getDatosDelRT(RecursoTecnologico rt, List<Marca> marcas) 
+        {
+            string rtADevolver = getNro().ToString()+"-"+Tipo.getNombre().ToString()+"-"+getModelo().ToString() + "-" + Modelo.getMarca(marcas).ToString();
+
+            string num = getNro().ToString();
+            string tipo = Tipo.getNombre().ToString();
+            string modelo = getModelo().Nombre.ToString();
+            string marca = Modelo.getMarca(marcas).ToString();
+
+            return (num, tipo, modelo, marca);
+        }
+
+        private Modelo getModelo()
+        {
+            throw new NotImplementedException();
         }
     }
 }

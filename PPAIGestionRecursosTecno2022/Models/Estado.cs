@@ -39,7 +39,7 @@
             return Descripcion;
         }
 
-        public bool sosDisponible()
+        public bool esDisponible()
         {
             return Nombre == "Disponible";
         }

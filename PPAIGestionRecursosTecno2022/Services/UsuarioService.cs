@@ -67,7 +67,7 @@ namespace PPAIGestionRecursosTecno2022.Services
         {
             try
             {
-                Usuario found = _usuarios.Where(x => x.NombreUsuario == name).SingleOrDefault();
+                Usuario found = _usuarios.Where(x => x.NombreUsuario == name.Trim()).SingleOrDefault();
                 if (found.Clave == password)
                 {
                     return found;

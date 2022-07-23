@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PPAIGestionRecursosTecno2022.Gestor;
 
 namespace PPAIGestionRecursosTecno2022.Controllers
 {
@@ -10,6 +11,12 @@ namespace PPAIGestionRecursosTecno2022.Controllers
         public string Saludar()
         {
             return "Hola manola";
+        }
+
+        [HttpGet]
+        public IActionResult buscarRecursosDelResponsable()
+        {
+            return Ok(GestorMantenimiento.GetInstanceGestor.buscarRecursosDelResponsable());
         }
     }
 }

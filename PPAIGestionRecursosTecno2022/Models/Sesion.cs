@@ -49,7 +49,7 @@
 
         public Usuario conocerUsuario()
         {
-            return Usuario;
+            return SessionManager.conocerUsuario();
         }
     }
 }

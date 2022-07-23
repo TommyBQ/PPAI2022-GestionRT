@@ -17,7 +17,7 @@ namespace PPAIGestionRecursosTecno2022.Controllers
         public IActionResult Login(string nombreUsuario, string password)
         {
             SessionManager.Login(UsuarioService.GetInstance.GetByNameAndPassword(nombreUsuario, password));
-            return Ok("Se inició correctamente la sesión! :D");
+            return Ok(UsuarioService.GetInstance.GetByNameAndPassword(nombreUsuario, password));
         }
 
         [HttpGet]

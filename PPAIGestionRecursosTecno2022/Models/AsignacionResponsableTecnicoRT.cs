@@ -40,9 +40,19 @@
             return FechaHasta;
         }
 
-        public List<RecursoTecnologico> getRecursosTecnologicos()
+        public List<RecursoTecnologico> getRecursosDisponibles()
         {
-            return RecursosTecnologicos;
+            List<RecursoTecnologico> listaRT = new List<RecursoTecnologico>();
+
+            foreach (RecursoTecnologico rt in RecursosTecnologicos)
+            {
+                if (rt.estaDisponible())
+                {
+                    listaRT.Add(rt);
+                }
+            }
+
+            return listaRT;
         }
 
         public void AgregarRecursoTecnologico(RecursoTecnologico recurso)
@@ -52,7 +62,7 @@
 
         public bool sosResponsableActual(PersonalCientifico personalCientifico)
         {
-            return PersonalCientifico == personalCientifico;
+            return PersonalCientifico == personalCientifico && FechaHasta == null;
         }
 
         public void crear()

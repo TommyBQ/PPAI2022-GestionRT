@@ -1,4 +1,5 @@
-﻿using PPAIGestionRecursosTecno2022.Models;
+﻿using PPAIGestionRecursosTecno2022.Gestor;
+using PPAIGestionRecursosTecno2022.Models;
 
 namespace PPAIGestionRecursosTecno2022
 {
@@ -25,6 +26,11 @@ namespace PPAIGestionRecursosTecno2022
             {
                 _session = new SessionManager();
                 _session.usuario = usuario;
+
+                Sesion sesionActiva = new Sesion();
+                sesionActiva.Usuario = usuario;
+
+                GestorMantenimiento.GetInstanceGestor.setSesion(sesionActiva);
             }
             else
             {

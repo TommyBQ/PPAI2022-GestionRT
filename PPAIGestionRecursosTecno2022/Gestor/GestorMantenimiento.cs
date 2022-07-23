@@ -5,23 +5,32 @@ namespace PPAIGestionRecursosTecno2022.Gestor
 {
     public class GestorMantenimiento
     {
+        private static GestorMantenimiento _gestorMantenimientoInstance;
+
         private DateTime _fechaFin;
         private string _motivo;
         private List<RecursoTecnologico> _recursos;
         private List<Turno> _turnos;
-        private AsignacionCientificoCI _cientifico;
+        private AsignacionResponsableTecnicoRT _asignacionResponsableTecnicoRT;
         private PersonalCientifico _personalCientifico;
         private Sesion _sesion;
-        private AsignacionCientificoCI _asignacionCientifico;
+        private List<AsignacionResponsableTecnicoRT> _listaAsignacionResponsableTecnicoRT;
 
-        private static GestorMantenimiento _gestorMantenimientoInstance;
+        private List<PersonalCientifico> _listaPersonalesCientificos;
 
         public DateTime FechaFin { get { return _fechaFin; } }
         public string Motivo { get { return _motivo; } }
         public List<RecursoTecnologico> Recursos { get { return _recursos; } }
         public List<Turno> Turnos { get { return _turnos; } }
         public Sesion Sesion { get { return _sesion; } }
-        public AsignacionCientificoCI AsignacionCientifico { get { return _cientifico; } }
+        public AsignacionResponsableTecnicoRT AsignacionCientifico { get { return _asignacionResponsableTecnicoRT; } }
+
+        public void setSesion(Sesion sesionActiva)
+        {
+            _sesion = sesionActiva;
+        }
+
+        public List<PersonalCientifico> PersonalesCientificos { get { return _listaPersonalesCientificos; } }
 
         public static GestorMantenimiento GetInstanceGestor
         {
@@ -32,24 +41,54 @@ namespace PPAIGestionRecursosTecno2022.Gestor
             }
         }
 
-
-        public static void setSesion(Sesion sesion)
+        public void cargarDatos()
         {
-            if (_gestorMantenimientoInstance == null)
+            _listaPersonalesCientificos = PersonalCientificoService.GetInstance.GetAll();
+            _listaAsignacionResponsableTecnicoRT = AsignacionResponsableTecnicoRTService.GetInstance.GetAll();
+        }
+
+        public List<RecursoTecnologico> buscarRecursosDelResponsable()
+        {
+            cargarDatos(); //Se cargan todos los datos en el gestor
+
+            Usuario usuarioLogueado = Sesion.conocerUsuario();
+
+            foreach (PersonalCientifico pers in _listaPersonalesCientificos)
             {
-                _gestorMantenimientoInstance = new GestorMantenimiento();
-                _gestorMantenimientoInstance._sesion = sesion;
+                if (pers.esTuUsuario(usuarioLogueado))
+                {
+                    _personalCientifico = pers; //Se encuentra el Personal Cientifico y se guarda en el gestor
+                    break;
+                }
             }
+
+            foreach (AsignacionResponsableTecnicoRT asi in _listaAsignacionResponsableTecnicoRT)
+            {
+                if (asi.sosResponsableActual(_personalCientifico))
+                {
+                    _asignacionResponsableTecnicoRT = asi; //Se guarda la AsignacionActiva
+                    break;
+                }
+            }
+
+            if (_asignacionResponsableTecnicoRT != null)
+            {
+                _recursos = _asignacionResponsableTecnicoRT.getRecursosDisponibles();
+            }
+
+            string datos = buscarDatosRT(_recursos);
         }
 
-        public static void buscarRecursosDelResponsable()
+        public string buscarDatosRT(List<RecursoTecnologico> rts)
         {
+            string stringDatosRT = "";
 
-        }
+            foreach (RecursoTecnologico rt in rts)
+            {
+                string datosDelRT = rt.getDatosDelRT();
 
-        public void buscarDatosRT()
-        {
-
+                stringDatosRT += "//"+datosDelRT;
+            }
         }
         public void buscarDatosCientifico()
         {

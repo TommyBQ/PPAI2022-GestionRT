@@ -72,11 +72,11 @@ namespace PPAIGestionRecursosTecno2022.DB
             TipoRTService.GetInstance.Insert(tipoRT5);
 
             //Modelo
-            Modelo modelo1 = new Modelo(1,"Modelo1");
-            Modelo modelo2 = new Modelo(2,"Modelo2");
-            Modelo modelo3 = new Modelo(3,"Modelo3");
-            Modelo modelo4 = new Modelo(4,"Modelo4");
-            Modelo modelo5 = new Modelo(5,"Modelo5");
+            Modelo modelo1 = new Modelo(1, "Modelo1");
+            Modelo modelo2 = new Modelo(2, "Modelo2");
+            Modelo modelo3 = new Modelo(3, "Modelo3");
+            Modelo modelo4 = new Modelo(4, "Modelo4");
+            Modelo modelo5 = new Modelo(5, "Modelo5");
 
             ModeloService.GetInstance.Insert(modelo1);
             ModeloService.GetInstance.Insert(modelo2);
@@ -85,11 +85,11 @@ namespace PPAIGestionRecursosTecno2022.DB
             ModeloService.GetInstance.Insert(modelo5);
 
             //Marca
-            Marca marca1 = new Marca(1,"Marca1");
-            Marca marca2 = new Marca(2,"Marca2");
-            Marca marca3 = new Marca(3,"Marca3");
-            Marca marca4 = new Marca(4,"Marca4");
-            Marca marca5 = new Marca(5,"Marca5");
+            Marca marca1 = new Marca(1, "Marca1");
+            Marca marca2 = new Marca(2, "Marca2");
+            Marca marca3 = new Marca(3, "Marca3");
+            Marca marca4 = new Marca(4, "Marca4");
+            Marca marca5 = new Marca(5, "Marca5");
 
             marca1.agregarModelo(modelo1);
             marca1.agregarModelo(modelo2);
@@ -157,12 +157,22 @@ namespace PPAIGestionRecursosTecno2022.DB
             CambioEstadoRTService.GetInstance.Insert(cambioEstadoRT5);
             CambioEstadoRTService.GetInstance.Insert(cambioEstadoRT6);
 
+            //ListaCambioEstadoRT
+            List<CambioEstadoRT> cambioEstadoRTs1 = new List<CambioEstadoRT>();
+            List<CambioEstadoRT> cambioEstadoRTs2 = new List<CambioEstadoRT>();
+
+            cambioEstadoRTs1.Add(cambioEstadoRT1);
+            cambioEstadoRTs1.Add(cambioEstadoRT2);
+
+            cambioEstadoRTs2.Add(cambioEstadoRT3);
+            cambioEstadoRTs2.Add(cambioEstadoRT4);
+
             //Turnos
-            Turno turno1 = new Turno(1,DateTime.Now.AddDays(2).AddHours(2), DateTime.Now.AddDays(2).AddHours(4), DateTime.Now.AddDays(2).DayOfWeek.ToString(), DateTime.Now, allCambiosEstadoTurnos); //List<CambioEstadoTurno> ---> Sería una lista de IDs? o una lista de objetos CambioEstadoTunro?
-            Turno turno2 = new Turno(2,DateTime.Now.AddDays(3).AddHours(2), DateTime.Now.AddDays(3).AddHours(4), DateTime.Now.AddDays(3).DayOfWeek.ToString(), DateTime.Now, allCambiosEstadoTurnos);
-            Turno turno3 = new Turno(3,DateTime.Now.AddDays(2).AddHours(4), DateTime.Now.AddDays(2).AddHours(6), DateTime.Now.AddDays(2).DayOfWeek.ToString(), DateTime.Now, allCambiosEstadoTurnos);
-            Turno turno4 = new Turno(4,DateTime.Now.AddDays(5).AddHours(1), DateTime.Now.AddDays(5).AddHours(3), DateTime.Now.AddDays(5).DayOfWeek.ToString(), DateTime.Now, allCambiosEstadoTurnos);
-            Turno turno5 = new Turno(5,DateTime.Now.AddDays(12).AddHours(6), DateTime.Now.AddDays(12).AddHours(7), DateTime.Now.AddDays(12).DayOfWeek.ToString(), DateTime.Now, allCambiosEstadoTurnos);
+            Turno turno1 = new Turno(1, DateTime.Now.AddDays(2).AddHours(2), DateTime.Now.AddDays(2).AddHours(4), DateTime.Now.AddDays(2).DayOfWeek.ToString(), DateTime.Now, allCambiosEstadoTurnos); //List<CambioEstadoTurno> ---> Sería una lista de IDs? o una lista de objetos CambioEstadoTunro?
+            Turno turno2 = new Turno(2, DateTime.Now.AddDays(3).AddHours(2), DateTime.Now.AddDays(3).AddHours(4), DateTime.Now.AddDays(3).DayOfWeek.ToString(), DateTime.Now, allCambiosEstadoTurnos);
+            Turno turno3 = new Turno(3, DateTime.Now.AddDays(2).AddHours(4), DateTime.Now.AddDays(2).AddHours(6), DateTime.Now.AddDays(2).DayOfWeek.ToString(), DateTime.Now, allCambiosEstadoTurnos);
+            Turno turno4 = new Turno(4, DateTime.Now.AddDays(5).AddHours(1), DateTime.Now.AddDays(5).AddHours(3), DateTime.Now.AddDays(5).DayOfWeek.ToString(), DateTime.Now, allCambiosEstadoTurnos);
+            Turno turno5 = new Turno(5, DateTime.Now.AddDays(12).AddHours(6), DateTime.Now.AddDays(12).AddHours(7), DateTime.Now.AddDays(12).DayOfWeek.ToString(), DateTime.Now, allCambiosEstadoTurnos);
 
             turno1.AgregarCambioEstadoTurno(cambioEstadoTurno1);
             turno2.AgregarCambioEstadoTurno(cambioEstadoTurno2);
@@ -176,7 +186,39 @@ namespace PPAIGestionRecursosTecno2022.DB
 
             //RecursoTecnologico
             List<RecursoTecnologico> allRecursosTecnologicos = new List<RecursoTecnologico>();
-            //RecursoTecnologico recursoTecnologico1 = new RecursoTecnologico(1, "RT1", modelo1, tipoRT1, null, null, null);
+            RecursoTecnologico recursoTecnologico1 = new RecursoTecnologico(1, "NombreRT1", DateTime.Now, modelo1, tipoRT1, null, cambioEstadoRTs2, "");
+            RecursoTecnologico recursoTecnologico2 = new RecursoTecnologico(2, "NombreRT2", DateTime.Now, modelo2, tipoRT2, null, cambioEstadoRTs1, "");
+            RecursoTecnologico recursoTecnologico3 = new RecursoTecnologico(3, "NombreRT3", DateTime.Now, modelo3, tipoRT3, null, cambioEstadoRTs2, "");
+            RecursoTecnologico recursoTecnologico4 = new RecursoTecnologico(4, "NombreRT4", DateTime.Now, modelo4, tipoRT4, null, cambioEstadoRTs1, "");
+
+            RecursoTecnologicoService.GetInstance.Insert(recursoTecnologico1);
+            RecursoTecnologicoService.GetInstance.Insert(recursoTecnologico2);
+            RecursoTecnologicoService.GetInstance.Insert(recursoTecnologico3);
+            RecursoTecnologicoService.GetInstance.Insert(recursoTecnologico4);
+
+            //ListasRTs
+            List<RecursoTecnologico> listaRecursoTecnologicos1 = new List<RecursoTecnologico>();
+            List<RecursoTecnologico> listaRecursoTecnologicos2 = new List<RecursoTecnologico>();
+            List<RecursoTecnologico> listaRecursoTecnologicos3 = new List<RecursoTecnologico>();
+
+            listaRecursoTecnologicos1.Add(recursoTecnologico1);
+            listaRecursoTecnologicos1.Add(recursoTecnologico2);
+
+            listaRecursoTecnologicos2.Add(recursoTecnologico3);
+            listaRecursoTecnologicos2.Add(recursoTecnologico1);
+            listaRecursoTecnologicos2.Add(recursoTecnologico4);
+
+            listaRecursoTecnologicos3.Add(recursoTecnologico2);
+            listaRecursoTecnologicos3.Add(recursoTecnologico4);
+
+            //AsignacionResponsableTecnicoRT
+            AsignacionResponsableTecnicoRT asignacionResponsableTecnicoRT1 = new AsignacionResponsableTecnicoRT(1, DateTime.Now, DateTime.Now.AddDays(2).AddHours(4), personalCientifico1, listaRecursoTecnologicos1);
+            AsignacionResponsableTecnicoRT asignacionResponsableTecnicoRT2 = new AsignacionResponsableTecnicoRT(2, DateTime.Now, null, personalCientifico1, listaRecursoTecnologicos2);
+            AsignacionResponsableTecnicoRT asignacionResponsableTecnicoRT3 = new AsignacionResponsableTecnicoRT(3, DateTime.Now, DateTime.Now.AddDays(2).AddHours(4), personalCientifico1, listaRecursoTecnologicos3);
+
+            AsignacionResponsableTecnicoRTService.GetInstance.Insert(asignacionResponsableTecnicoRT1);
+            AsignacionResponsableTecnicoRTService.GetInstance.Insert(asignacionResponsableTecnicoRT2);
+            AsignacionResponsableTecnicoRTService.GetInstance.Insert(asignacionResponsableTecnicoRT3);
         }
     }
 }
